@@ -1,0 +1,5 @@
+@media (min-width: 992px) {
+    .md:max-w-61 {
+      max-width: 61.25%;
+    }
+  }
