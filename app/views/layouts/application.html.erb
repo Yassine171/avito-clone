@@ -9,16 +9,34 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/css/glide.core.min.css">
+ <link rel="icon" type="image/png" href="https://www.avito.ma/phoenix-assets/icons/favicon.ico">
+  <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css" />
   </head>
 
   <body class="bg-gray-100">
+
+
   <%= render 'layouts/navigation' %>
 
-   <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+  <% if notice.present? %>
+    <div class="p-4 my-5 mx-16 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-green-800 dark:text-green-400" role="alert">
+      <span class="font-medium"><%= notice %></span>
+    </div>
+  <% end %>
+
+<% if alert.present? %>
+      <div class=" p-4 my-5 mx-16 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+      <span class="font-medium"><%= alert %></span>
+    </div>
+<% end %>
+
 
     <%= yield %>
 
     <%= render 'layouts/footer' %>
+
+     <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
   </body>
 </html>

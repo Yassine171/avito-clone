@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_23_131851) do
+ActiveRecord::Schema.define(version: 2023_05_06_233936) do
 
-  create_table "active_storage_attachments", force: :cascade do |t|
+  create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2023_04_23_131851) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", force: :cascade do |t|
+  create_table "active_storage_blobs", charset: "utf8mb4", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -34,52 +34,80 @@ ActiveRecord::Schema.define(version: 2023_04_23_131851) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", force: :cascade do |t|
+  create_table "active_storage_variant_records", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "annonces", force: :cascade do |t|
+  create_table "annonces", charset: "utf8mb4", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.integer "price"
     t.string "etat"
     t.string "type_transaction"
-    t.integer "ville_id", null: false
-    t.integer "user_id", null: false
-    t.integer "category_id", null: false
-    t.json "additional_properties"
+    t.bigint "ville_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "category_id", null: false
+    t.text "additional_properties", size: :long, collation: "utf8mb4_bin"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_annonces_on_category_id"
     t.index ["user_id"], name: "index_annonces_on_user_id"
     t.index ["ville_id"], name: "index_annonces_on_ville_id"
+    t.check_constraint "json_valid(`additional_properties`)", name: "additional_properties"
   end
 
-  create_table "categories", force: :cascade do |t|
+  create_table "categories", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "contacts", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "subject"
+    t.text "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "favorites", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "annonce_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["annonce_id"], name: "index_favorites_on_annonce_id"
+    t.index ["user_id", "annonce_id"], name: "index_favorites_on_user_id_and_annonce_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "phone_number"
-    t.integer "ville_id", null: false
+    t.bigint "ville_id", null: false
+    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["phone_number"], name: "index_users_on_phone_number", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["ville_id"], name: "index_users_on_ville_id"
   end
 
-  create_table "villes", force: :cascade do |t|
+  create_table "villes", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -90,5 +118,7 @@ ActiveRecord::Schema.define(version: 2023_04_23_131851) do
   add_foreign_key "annonces", "categories"
   add_foreign_key "annonces", "users"
   add_foreign_key "annonces", "villes"
+  add_foreign_key "favorites", "annonces"
+  add_foreign_key "favorites", "users"
   add_foreign_key "users", "villes"
 end

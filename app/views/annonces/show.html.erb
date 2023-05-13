@@ -1,4 +1,236 @@
-<div>
-  <h1 class="font-bold text-4xl">Annonces#show</h1>
-  <p>Find me in app/views/annonces/show.html.erb</p>
+<div class="mx-16 my-8">
+  <div class="max-w-1/2 flex-1 box-border w-full" style="	-webkit-box-flex: 1;">
+    <div class="bg-white overflow-hidden pt-4 rounded-md relative" style="box-shadow: rgba(0, 0, 0, 0.07) 0px 2px 18px 0px;">
+
+
+      <div class="absolute top-4 right-4 cursor flex items-center justify-center p-2 z-50 rounded-full" style="background-color: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.14) 0px 4px 22px 0px;">
+        <button class="favorite-button text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out focus:outline-none">
+          <svg class="heart-empty" height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="fill: rgb(74, 74, 74);stroke: rgb(74, 74, 74)">
+            <title id="HeartOutlineTitleID">Sauvegarder l’annonce</title>
+              <path fill-rule="evenodd" d="M2.405 12.33c-1.231-3.824.407-7.833 4.078-9.015a6.562 6.562 0 015.25.541l.263.158.268-.159a6.571 6.571 0 014.982-.619l.266.08c3.673 1.182 5.317 5.192 4.082 9.03a12.42 12.42 0 01-2.977 4.736 34.695 34.695 0 01-5.995 4.665l-.23.143a.732.732 0 01-.762.006l-.245-.147a34.717 34.717 0 01-6.005-4.673 12.427 12.427 0 01-2.975-4.747zm9.194-6.363l-.185-.132a4.784 4.784 0 00-4.162-.606c-2.664.856-3.872 3.808-2.94 6.696a10.232 10.232 0 002.448 3.899A31.118 31.118 0 0012.135 20L12 19.916l.438-.275a31.11 31.11 0 004.304-3.342l.495-.47a10.226 10.226 0 002.45-3.889c.934-2.9-.279-5.854-2.944-6.71a4.793 4.793 0 00-4.336.728.686.686 0 01-.81.009z" clip-rule="evenodd"></path>
+          </svg>
+          <svg class="heart-icon" height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="    fill: rgb(209, 54, 73); stroke: rgb(209, 54, 73);">
+            <title id="HeartOutlineTitleID">Sauvegarder l’annonce</title>
+            <path fill-rule="evenodd" d="M2.405 12.33c-1.231-3.824.407-7.833 4.078-9.015a6.562 6.562 0 015.25.541l.263.158.268-.159a6.571 6.571 0 014.982-.619l.266.08c3.673 1.182 5.317 5.192 4.082 9.03a12.42 12.42 0 01-2.977 4.736 34.695 34.695 0 01-5.995 4.665l-.23.143a.732.732 0 01-.762.006l-.245-.147a34.717 34.717 0 01-6.005-4.673 12.427 12.427 0 01-2.975-4.747zm9.194-6.363l-.185-.132a4.784 4.784 0 00-4.162-.606c-2.664.856-3.872 3.808-2.94 6.696a10.232 10.232 0 002.448 3.899A31.118 31.118 0 0012.135 20L12 19.916l.438-.275a31.11 31.11 0 004.304-3.342l.495-.47a10.226 10.226 0 002.45-3.889c.934-2.9-.279-5.854-2.944-6.71a4.793 4.793 0 00-4.336.728.686.686 0 01-.81.009z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+      </div>
+
+      <% if @annonce.images.length == 1 %>
+        <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+          <%= image_tag @annonce.images.first, class: 'absolute block w-full h-full object-cover object-center' %>
+        </div>
+      <% elsif @annonce.images.length > 1%>
+        <div id="default-carousel" class="relative w-full" data-carousel="slide">
+          <!-- Carousel wrapper -->
+          <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+            <% @annonce.images.each_with_index do |image, index| %>
+              <div class="carousel-item duration-700 ease-in-out "  data-carousel-item >
+                <%= image_tag image, class: 'absolute block w-full h-full object-cover object-center' %>
+              </div>
+            <% end %>
+            <!-- End of carousel slides -->
+          </div>
+          <!-- Slider controls -->
+          <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+              <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+              <span class="sr-only">Previous</span>
+            </span>
+          </button>
+          <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+              <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+              <span class="sr-only">Next</span>
+            </span>
+          </button>
+        </div>
+      <% else %>
+        <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+          <%= image_tag "default-annonce.jpg", class: 'absolute block w-full h-full object-cover object-center' %>
+        </div>
+      <% end %>
+        <div style="padding:0px 38px;-webkit-box-pack:center;" class="box-border flex flex-col  justify-center">
+                  <div class="flex flex-col py-6">
+                    <div class="flex flex-wrap justify-between items-start">
+                      <div class="flex flex-col justify-between">
+                        <h1 class="text-midnight-normal font-bold text-2xl mb-3"><%= @annonce.title %></h1>
+                      </div>
+                      <div class="grid grid-cols-2 gap-4 items-center justify-end">
+                        <p class="font-bold text-blue-600 text-lg uppercase"><%= number_to_currency(@annonce.price, unit: "DH", precision: 2, delimiter: ".", separator: ",") %></p>
+                      </div>
+                    </div>
+                    <div class="flex items-center mt-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" viewBox="0 0 24 24" fill="currentColor">
+                        <title>MapPinFill Icon</title>
+                        <path d="M18.364 17.364L12 23.728l-6.364-6.364a9 9 0 1112.728 0zM12 15a4 4 0 100-8 4 4 0 000 8zm0-2a2 2 0 110-4 2 2 0 010 4z" />
+                      </svg>
+                      <span class="text-gray-700 ml-2 text-sm font-medium"><%= @annonce.ville.name %></span>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 ml-6" viewBox="0 0 24 24" fill="currentColor">
+                        <title>TimeFill Icon</title>
+                        <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm1-10V7h-2v7h6v-2h-4z" />
+                      </svg>
+                      <span class="text-gray-700 ml-2 text-sm font-medium"><%= time_ago_in_words(@annonce.created_at) %> ago</span>
+                    </div>
+                  </div>
+                  <div style="border-radius:0px;box-sizing:border-box;margin:0px;box-shadow:none;padding:24px 0px;border-top:1px solid rgb(231, 231, 232);background-color:rgb(255, 255, 255);overflow:hidden;padding-top:24px;">
+                      <div style="display:block;box-sizing:border-box;">
+                          <div style="box-sizing:border-box;background-color:rgb(255, 255, 255);display:flex;flex-direction:row;-webkit-box-align:center;align-items:center;width: 100%;-webkit-box-pack:justify;justify-content:space-between;z-index:1020;animation:0.3s ease 0s 1 normal none running dJAjbf;">
+                              <div style="max-width:1280px;box-sizing:border-box;display:flex;flex:1 1 0%;-webkit-box-pack:start;justify-content:flex-start;-webkit-box-align:center;align-items:center;gap:8px;width: 100%;margin: 0px auto;">
+                              <% if @annonce.user.avatar.attached? %>
+                                  <%= image_tag @annonce.user.avatar, alt: "avatar de vendeur", style: "display: block; margin-right: 16px; height: 64px; width: 64px; flex: 0 0 auto; object-fit: cover; border-radius: 50%; vertical-align: middle; border-style: none; box-sizing: border-box;" %>
+                                <% else %>
+                                  <%= image_tag "default-avatar.png", alt: "avatar de vendeur par défaut", style: "display: block; margin-right: 16px; height: 64px; width: 64px; flex: 0 0 auto; object-fit: cover; border-radius: 50%; vertical-align: middle; border-style: none; box-sizing: border-box;" %>
+                                <% end %>
+                                  <div class="flex flex-col items-start justify-center flex-shrink-0">
+                                      <div class="flex flex-col items-start justify-center">
+                                          <span class="inline-block px-3 py-2 text-xs font-medium text-white uppercase bg-yellow-500 rounded-full">
+                                              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="Store2LineTitleID" class="inline-block w-5 h-5 mr-1" fill="currentColor">
+                                                  <title>Store2Line Icon</title>
+                                                  <path d="M21 13.242V20h1v2H2v-2h1v-6.758A4.496 4.496 0 011 9.5c0-.827.224-1.624.633-2.303L4.345 2.5a1 1 0 01.866-.5H18.79a1 1 0 01.866.5l2.702 4.682A4.496 4.496 0 0121 13.242zm-2 .73a4.496 4.496 0 01-3.75-1.36A4.496 4.496 0 0112 14.001a4.496 4.496 0 01-3.25-1.387A4.496 4.496 0 015 13.973V20h14v-6.027zM5.789 4L3.356 8.213a2.5 2.5 0 004.466 2.216c.335-.837 1.52-.837 1.856 0a2.5 2.5 0 004.644 0c.335-.837 1.52-.837 1.856 0a2.5 2.5 0 104.457-2.232L18.21 4H5.79z"></path>
+                                              </svg>
+                                              Boutique
+                                          </span>
+                                          <p class="text-black font-medium text-lg mt-2 mb-0 truncate max-w-xs" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+                                              <%= @annonce.user.name %>
+                                          </p>
+                                          <a href="https://www.avito.ma/fr/boutique?id=4263" class="block mt-2 text-blue-600 underline hover:text-blue-800">Voir la boutique</a>
+                                      </div>
+                                  </div>
+                                  <div style="box-sizing:border-box;display:block;background-color:rgb(231, 231, 232);height:64px;width: 1px;margin: auto 16px;"></div>
+                                  <div style="box-sizing:border-box;background-color:rgb(231, 231, 232);height:64px;width: 1px;margin: auto 16px;display:none;"></div>
+                                <div style="box-sizing:border-box;--gutter:8px;display:flex;flex-direction:row;justify-self:flex-end;-webkit-box-pack:end;justify-content:flex-end;margin-left: auto;">
+                                  <a href="https://wa.me/<%= @annonce.user.phone_number %>" target="_blank" type="button" class="flex items-center justify-center h-12 w-12 rounded-full border border-green-500 text-green-500 shadow-sm bg-transparent hover:bg-green-50 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mx-1">
+                                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="WhatsappLineTitleID" class="h-6 w-6 stroke-current" style="fill: currentcolor;stroke-width: 0;">
+                                              <title style="box-sizing:border-box;">WhatsappLine Icon</title>
+                                                  <path d="M7.253 18.494l.724.423A7.953 7.953 0 0012 20a8 8 0 10-8-8 7.95 7.95 0 001.084 4.024l.422.724-.653 2.401 2.4-.655zM2.004 22l1.352-4.968A9.954 9.954 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.954 9.954 0 01-5.03-1.355L2.004 22zM8.391 7.308c.134-.01.269-.01.403-.004.054.004.108.01.162.016.159.018.334.115.393.249.298.676.588 1.357.868 2.04.062.152.025.347-.093.537a4.38 4.38 0 01-.263.372c-.113.145-.356.411-.356.411s-.099.118-.061.265c.014.056.06.137.102.205l.059.095c.256.427.6.86 1.02 1.268.12.116.237.235.363.346.468.413.998.75 1.57 1l.005.002c.085.037.128.057.252.11.062.026.126.049.191.066a.35.35 0 00.367-.13c.724-.877.79-.934.796-.934v.002a.482.482 0 01.378-.127c.06.004.121.015.177.04.531.243 1.4.622 1.4.622l.582.261c.098.047.187.158.19.265.004.067.01.175-.013.373-.032.259-.11.57-.188.733a1.155 1.155 0 01-.21.302 2.378 2.378 0 01-.33.288 3.71 3.71 0 01-.125.09 5.024 5.024 0 01-.383.22 1.99 1.99 0 01-.833.23c-.185.01-.37.024-.556.014-.008 0-.568-.087-.568-.087a9.448 9.448 0 01-3.84-2.046c-.226-.199-.435-.413-.649-.626-.89-.885-1.562-1.84-1.97-2.742A3.47 3.47 0 016.9 9.62a2.729 2.729 0 01.564-1.68c.073-.094.142-.192.261-.305.127-.12.207-.184.294-.228a.961.961 0 01.371-.1z" style="box-sizing:border-box;"></path>
+
+                                              </svg>
+                                    </a>
+                                        <a href="tel:<%= @annonce.user.phone_number %>" type="button" class="flex items-center justify-center h-12 w-12 rounded-full border border-blue-500 text-blue-500 shadow-sm bg-transparent hover:bg-blue-50 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mx-1">
+                                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="PhoneLineTitleID" class="h-6 w-6 stroke-current" style="fill: currentcolor;stroke-width: 0;">
+                                            <title>PhoneLine Icon</title>
+                                            <path d="M9.366 10.682a10.556 10.556 0 003.952 3.952l.884-1.238a1 1 0 011.294-.296 11.422 11.422 0 004.583 1.364 1 1 0 01.921.997v4.462a1 1 0 01-.898.995A15.51 15.51 0 0118.5 21C9.94 21 3 14.06 3 5.5c0-.538.027-1.072.082-1.602A1 1 0 014.077 3h4.462a1 1 0 01.997.921A11.422 11.422 0 0010.9 8.504a1 1 0 01-.296 1.294l-1.238.884zm-2.522-.657l1.9-1.357A13.41 13.41 0 017.647 5H5.01c-.006.166-.009.333-.009.5C5 12.956 11.044 19 18.5 19c.167 0 .334-.003.5-.01v-2.637a13.41 13.41 0 01-3.668-1.097l-1.357 1.9a12.442 12.442 0 01-1.588-.75l-.058-.033a12.556 12.556 0 01-4.702-4.702l-.033-.058a12.442 12.442 0 01-.75-1.588z"/>
+                                            </svg>
+                                          </a>
+
+                                          <button type="button" class="flex items-center justify-center h-10 px-4 rounded-full border border-blue-500 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mx-1">
+                                          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="ChatBubbleOutlineTitleID" class="h-5 w-5 stroke-current mr-2" style="fill: currentcolor;stroke-width: 0;">
+                                              <title>ChatBubbleOutline Icon</title>
+                                              <path d="M6.8 19.2l.7-.4c.8-.5 1.8-.7 2.7-.5.2 0 .4.1.5.1.4.1.8.1 1.2.1 4.4 0 7.9-3 7.9-6.6S16.4 5.2 12 5.2s-7.9 3-7.9 6.6c0 1.4.5 2.7 1.4 3.8 0 .1.1.1.2.2.8.8 1.2 2 1.1 3.1v.3zm-.6 2.7c-.5.3-1.1.2-1.4-.3-.1-.2-.2-.4-.1-.6l.2-2.3c0-.6-.2-1.1-.6-1.6-.1 0-.2-.1-.3-.2-1.2-1.4-1.9-3.2-1.9-5.1C2.1 7 6.5 3.2 12 3.2s9.9 3.8 9.9 8.6-4.4 8.6-9.9 8.6c-.5 0-1 0-1.5-.1-.2 0-.4-.1-.6-.1-.5-.1-.9 0-1.4.3l-2.3 1.4z"/>
+                                          </svg>
+                                          <span class="text-sm uppercase font-medium">Demander le prix</span>
+                                      </button>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+              <div style="box-sizing:border-box;padding:24px 0px;border-top:1px solid rgb(231, 231, 232);">
+                <div style="box-sizing:border-box;display:flex;justify-content:space-around;-webkit-box-align:center;align-items:center;padding-bottom:12px;">
+                    <div style="box-sizing:border-box;display:flex;-webkit-box-align:center;align-items:center;max-width:33.3333%;">
+                        <div style="box-sizing:border-box;display:flex;flex-direction:column;-webkit-box-align:center;align-items:center;min-width:100%;min-height:100%;">
+                            <div width="48" height="48" style="box-sizing:border-box;margin-right:0px;margin-bottom:4px;flex-shrink:0;font-weight:600;display:flex;-webkit-box-align:center;align-items:center;-webkit-box-pack:center;justify-content:center;margin:0px 0px 4px;height:48px;width: 48px;background-color:rgb(242, 242, 242);border-radius:100px;"><svg height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="CarburantTitleID" style="fill: rgb(74, 74, 74); stroke: rgb(74, 74, 74); stroke-width: 0;stroke:rgb(74, 74, 74);stroke-width:0px;overflow:hidden;vertical-align:middle;box-sizing:border-box;">
+                                    <title style="box-sizing:border-box;">Carburant Icon</title>
+                                    <path d="M17.9 9.2V5.6c0-.3-.3-.6-.7-.6H9.7c-.3 0-.6.2-.6.6v3.6c0 .2.2.4.5.4h7.9c.2 0 .4-.1.4-.4zm-.9-.4h-7v-3h7v3zm-4.4 3.6c-.2 0-.5.2-.5.4s.2.4.5.4h1.7c.2 0 .5-.2.5-.4s-.2-.4-.5-.4h-1.7z" style="box-sizing:border-box;"></path>
+                                    <path d="M13.6 20.3H5.8v-1.9h6.4c.3 0 .5-.2.5-.4s-.2-.4-.5-.4H7.6v-12c0-1.1.9-1.9 2.1-1.9h7.4c1.2 0 2.1.9 2.1 1.9V11c0 .2.2.4.5.4s.5-.2.5-.4V5.6c0-1.5-1.3-2.8-3-2.8H9.8c-1.7 0-3 1.2-3 2.8v.8H6c-.1 0-.3.1-.4.2-1.4 1.6-2.2 2.6-2.8 3.3-.5.6-.8 1.4-.8 2.2 0 2 1.8 3.6 4 3.6h.8v1.9H5.4c-.3 0-.5.2-.5.4v2.7c0 .2.2.4.5.4h8.2c.3 0 .5-.2.5-.4-.1-.2-.3-.4-.5-.4zM6 14.9c-1.7 0-3.1-1.3-3.1-2.8 0-.6.2-1.2.6-1.7.6-.7 1.4-1.6 2.7-3.1h.6v7.6H6z" style="box-sizing:border-box;"></path>
+                                    <path d="M18.2 11.6c-.1-.1-.2-.1-.3-.1-.1 0-.2 0-.3.1-.4.4-3.8 3.9-3.8 5.8 0 2.1 1.8 3.8 4.1 3.8s4.1-1.7 4.1-3.8c0-2-3.4-5.4-3.8-5.8zm-.3 8.7c-1.8 0-3.2-1.3-3.2-2.9 0-1.2 2.1-3.7 3.2-4.9 1.1 1.2 3.2 3.7 3.2 4.9 0 1.6-1.4 2.9-3.2 2.9z" style="box-sizing:border-box;"></path>
+                                    <path d="M17.9 18.5c-.7 0-1.2-.5-1.2-1.1 0-.2-.2-.4-.5-.4s-.5.2-.5.4c0 1.1.9 1.9 2.1 1.9.2 0 .5-.2.5-.4s-.2-.4-.4-.4z" style="box-sizing:border-box;"></path>
+                                </svg></div><span style="box-sizing:border-box;font-size:12px;min-width:100%;font-weight:600;color:rgb(74, 74, 74);letter-spacing:0.25px;text-align:center;margin-top:12px;">Diesel</span>
+                        </div>
+                    </div>
+                    <div style="box-sizing:border-box;display:flex;-webkit-box-align:center;align-items:center;max-width:33.3333%;">
+                          <div style="box-sizing:border-box;display:flex;flex-direction:column;-webkit-box-align:center;align-items:center;min-width:100%;min-height:100%;">
+                              <div width="48" height="48" style="box-sizing:border-box;margin-right:0px;margin-bottom:4px;flex-shrink:0;font-weight:600;display:flex;-webkit-box-align:center;align-items:center;-webkit-box-pack:center;justify-content:center;margin:0px 0px 4px;height:48px;width: 48px;background-color:rgb(242, 242, 242);border-radius:100px;"><svg height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="BoiteAVitesseTitleID" style="fill: rgb(74, 74, 74); stroke: rgb(74, 74, 74); stroke-width: 0;stroke:rgb(74, 74, 74);stroke-width:0px;overflow:hidden;vertical-align:middle;box-sizing:border-box;">
+                                      <title style="box-sizing:border-box;">BoiteAVitesse Icon</title>
+                                      <path fill-rule="evenodd" d="M12 3.2c-4.9 0-8.8 4-8.8 8.8 0 4.9 4 8.8 8.8 8.8 4.9 0 8.8-4 8.8-8.8 0-4.9-3.9-8.8-8.8-8.8M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 4.5 10 10-4.5 10-10 10" clip-rule="evenodd" style="box-sizing:border-box;"></path>
+                                      <path d="M16.3 8.4c-.3 0-.6.3-.6.6v2.5h-3.1V8.9c0-.3-.3-.6-.6-.6s-.6.3-.6.6v2.5H8.3V8.9c0-.3-.3-.5-.6-.6-.3 0-.6.2-.6.6V12c0 .3.3.6.6.6h3.7v2.5c0 .3.3.6.6.6s.6-.3.6-.6v-2.5h3.1v2.5c0 .3.3.6.6.6s.6-.3.6-.6V8.9c-.1-.3-.3-.5-.6-.5z" style="box-sizing:border-box;"></path>
+                                  </svg></div><span style="box-sizing:border-box;font-size:12px;min-width:100%;font-weight:600;color:rgb(74, 74, 74);letter-spacing:0.25px;text-align:center;margin-top:12px;">Automatique</span>
+                          </div>
+                      </div>
+
+                      <div style="box-sizing:border-box;display:flex;-webkit-box-align:center;align-items:center;max-width:33.3333%;">
+                          <div style="box-sizing:border-box;display:flex;flex-direction:column;-webkit-box-align:center;align-items:center;min-width:100%;min-height:100%;">
+                              <div width="48" height="48" style="box-sizing:border-box;margin-right:0px;margin-bottom:4px;flex-shrink:0;font-weight:600;display:flex;-webkit-box-align:center;align-items:center;-webkit-box-pack:center;justify-content:center;margin:0px 0px 4px;height:48px;width: 48px;background-color:rgb(242, 242, 242);border-radius:100px;"><svg height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="PuissanceFiscaleTitleID" style="fill: rgb(74, 74, 74); stroke: rgb(74, 74, 74); stroke-width: 0;stroke:rgb(74, 74, 74);stroke-width:0px;overflow:hidden;vertical-align:middle;box-sizing:border-box;">
+                                      <title style="box-sizing:border-box;">PuissanceFiscale Icon</title>
+                                      <path d="M20.2 8.4c.2 0 .3-.1.4-.2l1-1.7c.1-.2.1-.5-.2-.6l-.7-.4-.1-1.5c0-.1-.1-.3-.2-.4L17.7 2h-.4l-1.2.6-.7-.4c-.2-.1-.5-.1-.6.2l-1 1.7c-.1.1-.1.2 0 .3 0 .1.1.2.2.3l.5.3-1.6.8c-.1 0-.1.1-.2.2L12 7.3 11.3 6c0-.1-.1-.1-.2-.2L9.5 5l.6-.3c.2-.1.3-.4.2-.6l-1-1.7c-.1-.2-.2-.2-.3-.3h-.3l-.8.5L6.7 2c-.1 0-.2 0-.4.1L3.6 3.7c-.1.1-.2.2-.2.3l-.1 1.4-.7.4c-.2.1-.3.4-.2.6l1 1.7c.1.1.2.2.4.2.1 0 .1 0 .2-.1l.5-.2-.1 1.8c0 .1 0 .2.1.3l.4.7c-1 .6-1.6 1.7-1.6 2.9 0 1.9 1.5 3.4 3.3 3.4h.7v.3l-.7.6c-.1.1-.1.2-.1.3v.7H5.3c-.2 0-.4.2-.4.5v2c0 .3.2.5.4.5h13.4c.2 0 .4-.2.4-.5v-2c0-.2-.2-.4-.4-.5h-1.1v-.7c0-.1 0-.2-.1-.3l-.6-.7V17h.7c1.8 0 3.3-1.5 3.3-3.4 0-1.3-.7-2.3-1.6-2.9l.4-.7c0-.1.1-.2.1-.3L19.5 8l.5.3c.1.1.2.1.2.1zM3.9 7.3l-.5-1L4 6c.1-.1.2-.2.2-.4l.1-1.3L6.6 3l1.2.6c.1.1.3.1.4 0l.6-.3.5 1-5.4 3zm2.6 8.9c-1.3 0-2.4-1.1-2.4-2.5 0-.9.5-1.7 1.2-2.2l1.2 2.1v1.3c0 .1 0 .2.1.3l.6.7v.3h-.7zM18.3 20v1.1H5.7V20h12.6zM7.9 15.4l-.6-.7v-.5h1.5c.3 1.6 1.6 2.8 3.2 2.8s2.9-1.2 3.2-2.8h1.5v.5l-.6.7c-.1.1-.1.2-.1.3v1.9c0 .1 0 .2.1.3l.6.7v.5H7.3v-.5l.6-.7c.1-.1.1-.2.1-.3v-1.9c.1-.1 0-.2-.1-.3zm1.8-1.7c0-1.3 1-2.4 2.3-2.4s2.3 1.1 2.3 2.4c0 1.3-1 2.4-2.3 2.4-1.3 0-2.3-1.1-2.3-2.4zm7.1-.4h-1.6c-.2-1.6-1.5-2.9-3.2-2.9-1.6 0-2.9 1.2-3.2 2.9H7.2l-2-3.5.2-2.3 3.1-1.9 2 1 1 1.8c.1.1.2.2.4.2s.3-.1.4-.2l1-1.8 2-1 3.1 1.9.2 2.3-1.8 3.5zm3.1.4c0 1.4-1.1 2.5-2.4 2.5h-.7v-.3l.6-.7c.1-.1.1-.2.1-.3v-1.3l1.2-2.1c.8.5 1.2 1.3 1.2 2.2zm-5.1-9.6l.5-1 .6.3c.1.1.3.1.4 0l1.1-.4 2.3 1.4.1 1.3c0 .1.1.3.2.4l.6.3-.5 1-5.3-3.3z" style="box-sizing:border-box;"></path>
+                                      <path d="M12 14.6c.5 0 .9-.4.9-.9s-.4-.9-.9-.9-.9.4-.9.9.4.9.9.9z" style="box-sizing:border-box;"></path>
+                                  </svg></div><span style="box-sizing:border-box;font-size:12px;min-width:100%;font-weight:600;color:rgb(74, 74, 74);letter-spacing:0.25px;text-align:center;margin-top:12px;">11 CV</span>
+                              </div>
+                            </div>
+                  </div>
+              </div>
+
+                <div class="flex flex-col py-8 space-y-4 border-t border-gray-300 mx-6">
+                  <div class=" pt-2 flex flex-row space-x-6 items-center">
+                    <h2 class="text-lg font-medium leading-6 text-gray-700 mr-8">Type Transaction :</h2>
+                    <p class="text-gray-500 leading-6 uppercase"><%= @annonce.type_transaction %></p>
+                  </div>
+                  <div class=" py-2  flex flex-row space-x-6  items-center">
+                    <h2 class="text-lg font-medium leading-6 text-gray-700 mr-8">Category :</h2>
+                    <p class="text-gray-500 leading-6"><%= @annonce.category.name %></p>
+                  </div>
+                </div>
+
+                <div class="box-border py-8 mx-6 border-t border-gray-300">
+                    <h2 class="text-lg font-medium leading-6 text-gray-700 mb-4">Description</h2>
+                    <p class="text-gray-500 leading-6"><%= @annonce.description %></p>
+                </div>
+              <div class="box-border flex flex-col items-center justify-center pt-32 border-t border-gray-300">
+                  <p class="text-gray-700 text-sm font-medium leading-5 my-4 text-center">Avito.ma n’est pas responsable des produits proposés dans les annonces.</p>
+                  <button type="button" class="flex items-center justify-center h-8 px-2 rounded-full border border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="ErrorOutlineTitleID" class="h-5 w-5 stroke-current mr-2 stroke-0" style="    fill: currentcolor;">
+                          <title>ErrorOutline Icon</title>
+                          <path d="M11 15h2v2h-2v-2zm0-8h2v6h-2V7zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+                      </svg>
+                      <span class="text-xs font-medium uppercase">Signaler un abus</span>
+                  </button>
+              </div>
+        </div>
+        </div>
+    </div>
+  </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const favoriteButton = document.querySelector('.favorite-button');
+    const heartIcon= document.querySelector('.heart-icon');
+    const heartEmpty= document.querySelector('.heart-empty');
+    const annonceId = <%= @annonce.id %>;
+    const csrfToken = '<%= form_authenticity_token %>';
+
+    // Check if the annonce is already favorited by the user
+    <% if user_signed_in? && current_user.favorited_annonces.include?(@annonce) %>
+      heartIcon.style.display ='block';
+      heartEmpty.style.display = 'none';
+    <% else %>
+     heartIcon.style.display ='none';
+      heartEmpty.style.display ='block';
+    <% end %>
+
+    favoriteButton.addEventListener('click', function() {
+      // Toggle the color of the icon
+      heartIcon.style.display = heartIcon.style.display === 'none' ? 'block' : 'none';
+      heartEmpty.style.display = heartEmpty.style.display === 'none' ? 'block' : 'none';
+
+      // Send a POST or DELETE request to add or remove the annonce from the user's favorites
+      const url = '/favorites' + (heartIcon.style.display === 'none' ? `/${annonceId}` : '' );
+      const method = heartIcon.style.display === 'none' ? 'DELETE' : 'POST';
+      const body = JSON.stringify({ annonce_id: annonceId });
+      fetch(url, {
+        method: method,
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': csrfToken
+        },
+        body: body
+      })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+    });
+  });
+</script>

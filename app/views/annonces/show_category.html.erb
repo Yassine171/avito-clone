@@ -1,0 +1,292 @@
+<div class="max-w-7xl mx-auto px-8 md:px-0">
+    <div class="block box-border py-4">
+      <ol class="mt-0 mb-0 box-border w-full p-0 flex justify-start flex-wrap text-xs">
+        <li class="box-border flex items-center leading-3">
+          <a href="https://www.avito.ma"
+            class="flex items-center text-gray-700 transition-colors duration-200 hover:text-blue-700">
+            <svg class="h-5 w-5 mr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+              aria-labelledby="HomeTitleID">
+              <title>Home Icon</title>
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z"></path>
+            </svg>
+            Accueil
+            <span class="font-semibold ml-2">></span>
+          </a>
+        </li>
+        <li class="flex items-center leading-3">
+          <span class="ml-3 text-blue-500">Toutes les catégories</span>
+        </li>
+      </ol>
+    </div>
+
+     <div class="flex flex-wrap">
+      <div class="w-full px-8">
+        <div class="pb-4 box-border mb-0">
+          <form class="flex box-border relative flex-wrap mb-6 p-4 rounded-lg bg-white" style="
+              box-shadow: rgba(68, 68, 68, 0.08) 0px 2px 18px 0px;
+              border-top: 4px solid rgb(17, 17, 17);
+              border-image: linear-gradient(
+                  to right,
+                  rgb(255, 76, 89) 33%,
+                  rgb(46, 201, 102) 33%,
+                  rgb(46, 201, 102) 66%,
+                  rgb(58, 164, 255) 66%
+                )
+                1 / 1 / 0 stretch;
+            " action="<%= annonces_path %>" method="get">>
+            <div class="w-full mb-16 max-w-full mx-auto" style="--gutter: 8px; padding-right: 8px; padding-left: 8px">
+              <div class="flex flex-wrap -mx-2">
+                <div class="px-2 lg:w-1/3">
+                  <div class="relative">
+                    <div>
+                      <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                        <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                          aria-labelledby="SearchLineTitleID"
+                          class="fill-current stroke-current stroke-0 overflow-hidden align-middle transition duration-200 ease-in-out">
+                          <title>SearchLine Icon</title>
+                          <path
+                            d="M11 2c4.968 0 9 4.032 9 9s-4.032 9-9 9-9-4.032-9-9 4.032-9 9-9zm0 16c3.867 0 7-3.133 7-7 0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7zm8.485.071l2.829 2.828-1.415 1.415-2.828-2.829 1.414-1.414z">
+                          </path>
+                        </svg>
+                      </div>
+                      <input type="text" autocomplete="off" name="keyword" placeholder="Que recherchez-vous?" value=""
+                        class="w-full h-12 pl-16 pr-4 flex-grow bg-transparent focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:ring-opacity-50" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="px-2 lg:w-1/3">
+                 <div class="max-w-full mx-auto relative">
+                  <select name="category" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <% Category.all.each do |category| %>
+                      <option value="<%= category.id %>"><%=category.name %></option>
+                    <% end %>
+                </select>
+                </div>
+              </div>
+
+                <div class="px-2 lg:w-1/3">
+                  <div class="relative">
+                         <select name="ville" id="ville" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <% Ville.all.each do |ville| %>
+                        <option value="<%= ville.id %>"><%=ville.name %></option>
+                      <% end %>
+                </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="
+                box-sizing: border-box;
+                width: 100%;
+                display: flex;
+                -webkit-box-pack: center;
+                justify-content: center;
+                position: absolute;
+                left: 0px;
+                right: 0px;
+                bottom: -20px;
+              ">
+              <button type="submit" aria-label="Rechercher"
+                class="uppercase overflow-visible font-medium text-md p-3 rounded-md border border-blue-500 text-white flex items-center justify-center transition-colors duration-150 bg-blue-600 border-blue-600 hover:outline-none hover:shadow-outline-blue hover:bg-blue-800 focus:shadow-outline-blue">
+                <span class="box-border ml-[-2px] mr-[10px] flex items-center justify-center">
+                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                    aria-labelledby="SearchLineTitleID" style="fill: currentcolor; stroke: rgb(255, 255, 255)"
+                    class="stroke-0 overflow-hidden align-middle box-border">
+                    <title style="box-sizing: border-box">Rechercher</title>
+                    <path
+                      d="M11 2c4.968 0 9 4.032 9 9s-4.032 9-9 9-9-4.032-9-9 4.032-9 9-9zm0 16c3.867 0 7-3.133 7-7 0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7zm8.485.071l2.829 2.828-1.415 1.415-2.828-2.829 1.414-1.414z"
+                      style="box-sizing: border-box"></path>
+                  </svg></span>Rechercher ( <%= @annonces.size %> )
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="box-border mt-12 mx-8">
+      <h1 class="text-lg font-normal mb-3 leading-5 truncate text-gray-700">
+        Toutes les catégories de <%= @category.name %> Annonces (<%= @annonces.size %> annonces)
+      </h1>
+
+      <div class="box-border flex flex-wrap flex-row mt-4 justify-start">
+        <% @annonces.each do |annonce| %>
+        <div class="box-border flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/3 p-4" style="width: 33.33%">
+          <a class="bg-white rounded-md shadow-md overflow-hidden h-full flex flex-col" href="<%= annonce_path(annonce) %>">
+            <div style="box-sizing: border-box; position: relative">
+              <div class="h-56 box-border relative flex">
+
+                                <div class="absolute top-4 right-4 cursor flex items-center justify-center p-2 z-50     rounded-full" style="background-color: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.14) 0px 4px 22px 0px;">
+
+                          <button class="favorite-button text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out focus:outline-none" data-annonce-id="<%= annonce.id %>">
+                            <svg class="heart-empty" height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="fill: rgb(74, 74, 74);stroke: rgb(74, 74, 74)">
+                              <title id="HeartOutlineTitleID">Sauvegarder l’annonce</title>
+                                <path fill-rule="evenodd" d="M2.405 12.33c-1.231-3.824.407-7.833 4.078-9.015a6.562 6.562 0 015.25.541l.263.158.268-.159a6.571 6.571 0 014.982-.619l.266.08c3.673 1.182 5.317 5.192 4.082 9.03a12.42 12.42 0 01-2.977 4.736 34.695 34.695 0 01-5.995 4.665l-.23.143a.732.732 0 01-.762.006l-.245-.147a34.717 34.717 0 01-6.005-4.673 12.427 12.427 0 01-2.975-4.747zm9.194-6.363l-.185-.132a4.784 4.784 0 00-4.162-.606c-2.664.856-3.872 3.808-2.94 6.696a10.232 10.232 0 002.448 3.899A31.118 31.118 0 0012.135 20L12 19.916l.438-.275a31.11 31.11 0 004.304-3.342l.495-.47a10.226 10.226 0 002.45-3.889c.934-2.9-.279-5.854-2.944-6.71a4.793 4.793 0 00-4.336.728.686.686 0 01-.81.009z" clip-rule="evenodd"></path>
+                            </svg>
+                            <svg class="heart-icon" height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="    fill: rgb(209, 54, 73); stroke: rgb(209, 54, 73);">
+                              <title id="HeartOutlineTitleID">Sauvegarder l’annonce</title>
+                              <path fill-rule="evenodd" d="M2.405 12.33c-1.231-3.824.407-7.833 4.078-9.015a6.562 6.562 0 015.25.541l.263.158.268-.159a6.571 6.571 0 014.982-.619l.266.08c3.673 1.182 5.317 5.192 4.082 9.03a12.42 12.42 0 01-2.977 4.736 34.695 34.695 0 01-5.995 4.665l-.23.143a.732.732 0 01-.762.006l-.245-.147a34.717 34.717 0 01-6.005-4.673 12.427 12.427 0 01-2.975-4.747zm9.194-6.363l-.185-.132a4.784 4.784 0 00-4.162-.606c-2.664.856-3.872 3.808-2.94 6.696a10.232 10.232 0 002.448 3.899A31.118 31.118 0 0012.135 20L12 19.916l.438-.275a31.11 31.11 0 004.304-3.342l.495-.47a10.226 10.226 0 002.45-3.889c.934-2.9-.279-5.854-2.944-6.71a4.793 4.793 0 00-4.336.728.686.686 0 01-.81.009z" clip-rule="evenodd"></path>
+                            </svg>
+                          </button>
+                        </div>
+                <div class="absolute bottom-0 left-0 m-2 rounded-full bg-black bg-opacity-70 flex items-center px-2 py-1">
+                  <svg class="h-5 w-5 text-white mr-1" style="fill: rgb(255, 255, 255)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <title>Camera Icon</title>
+                    <path d="M9.3 4h5.4l1.647 1.778H19.2c.99 0 1.8.8 1.8 1.778v10.666C21 19.2 20.19 20 19.2 20H4.8c-.99 0-1.8-.8-1.8-1.778V7.556c0-.978.81-1.778 1.8-1.778h2.853L9.3 4zM12 17.333c2.484 0 4.5-1.99 4.5-4.444 0-2.453-2.016-4.445-4.5-4.445s-4.5 1.992-4.5 4.445c0 2.453 2.016 4.444 4.5 4.444zm0-1.777c1.491 0 2.7-1.194 2.7-2.667 0-1.473-1.209-2.667-2.7-2.667s-2.7 1.194-2.7 2.667c0 1.473 1.209 2.667 2.7 2.667z" class="text-white"></path>
+                  </svg>
+                  <span class="text-white text-sm font-medium"><%= annonce.images.count %></span>
+                </div>
+                <% if annonce.images.attached? %>
+                  <%= image_tag annonce.images.first, class: "h-full w-full object-cover transition-opacity duration-250 ease-in-out opacity-100"%>
+                <% else %>
+                  <%= image_tag "default-annonce.jpg", class:"h-full w-full object-cover transition-opacity duration-250 ease-in-out opacity-100"%>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="relative overflow-hidden flex flex-col justify-between flex-grow" style="margin: 0px 16px;">
+              <div>
+                <div class="flex items-center justify-between mt-4 mb-2">
+                  <span class="overflow-hidden whitespace-no-wrap leading-none text-blue-600 text-2xl font-normal m-0" style="text-overflow: ellipsis">
+                    <div class="box-sizing: border-box">
+                      <span dir="auto"><%= number_to_currency(annonce.price, format: "%n") %></span>
+                      <span>DH</span>
+                    </div>
+                  </span>
+                </div>
+                <h3 class="text-left text-gray-700 block w-full text-base font-normal tracking-wide leading-normal mb-0">
+                  <span dir="auto" class="overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;"><%= annonce.title %></span>
+                </h3>
+              </div>
+
+              <div>
+                <p class="mt-3 mb-6 text-xs overflow-hidden whitespace-nowrap overflow-ellipsis text-gray-500 font-normal tracking-wider"><%= annonce.description %></p>
+                <div class="box-border flex items-center leading-4 mt-2 mb-11">
+                  <div style="box-sizing: border-box; display: flex; -webkit-box-align: center; align-items: center;">
+                    <svg height="19" width="19" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="TimeFillTitleID" style="fill: rgb(155, 155, 155)" class="stroke-0 overflow-hidden align-middle box-border w-3 h-3">
+                      <title style="box-sizing: border-box">TimeFill Icon</title>
+                      <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm1-10V7h-2v7h6v-2h-4z"></path>
+                    </svg>
+                    <span style="letter-spacing: 0.1px" class="box-border mr-4 text-xs text-gray-500 font-normal ml-1"><%= time_ago_in_words(annonce.created_at) %> ago</span>
+                  </div>
+                  <div style="-webkit-box-align: center" class="items-center flex">
+                    <svg height="19" width="19" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MapPinFillTitleID" style="fill: rgb(155, 155, 155); stroke: rgb(155, 155, 155)" class="stroke-0 overflow-hidden align-middle box-border w-3 h-3">
+                      <title style="box-sizing: border-box">MapPinFill Icon</title>
+                      <path d="M18.364 17.364L12 23.728l-6.364-6.364a9 9 0 1112.728 0zM12 15a4 4 0 100-8 4 4 0 000 8zm0-2a2 2 0 110-4 2 2 0 010 4z"></path>
+                    </svg>
+                    <span style="letter-spacing: 0.1px" class="box-border mr-4 text-xs text-gray-500 font-normal ml-1"><%= annonce.ville.name %></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <% end %>
+      </div>
+
+      <div class="text-center">
+          <nav aria-label="Page navigation example">
+            <ul class="inline-flex items-center -space-x-px">
+              <!-- Previous page link -->
+              <% if @annonces.previous_page %>
+                <li>
+                  <%= link_to '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>'.html_safe, annonces_show_category_path(page: @annonces.previous_page), class: 'block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white' %>
+                </li>
+              <% else %>
+                <li>
+                  <span class="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg cursor-not-allowed dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                  </span>
+                </li>
+              <% end %>
+
+              <!-- Page links -->
+              <% @annonces.total_pages.times do |i| %>
+                <% if i+1 == @annonces.current_page %>
+                  <li>
+                    <span class="z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">
+                      <%= i+1 %>
+                    </span>
+                  </li>
+                <% else %>
+                  <li>
+                    <%= link_to i+1, annonces_show_category_path(page: i+1), class: 'px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white' %>
+                  </li>
+                <% end %>
+              <% end %>
+
+              <!-- Next page link -->
+              <% if @annonces.next_page %>
+                <li>
+                  <%= link_to '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>'.html_safe, annonces_show_category_path(page: @annonces.next_page), class: 'block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white' %>
+                </li>
+              <% else %>
+                <li>
+                  <span class="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg cursor-not-allowed dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </span>
+              </li>
+              <% end %>
+            </ul>
+          </nav>
+      </div>
+    </div>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get all favorite buttons, heart icons, and heart empties on the page
+    const favoriteButtons = document.querySelectorAll('.favorite-button');
+    const heartIcons = document.querySelectorAll('.heart-icon');
+    const heartEmpties = document.querySelectorAll('.heart-empty');
+    const csrfToken = '<%= form_authenticity_token %>';
+
+    // Loop through each favorite button and add a click event listener
+    favoriteButtons.forEach((button, index) => {
+      const annonceId = button.dataset.annonceId;
+
+      // Check if the annonce is already favorited by the user
+      <% if user_signed_in? %>
+        const favoritedAnnonces = <%= current_user.favorited_annonces.pluck(:id) %>;
+        if (favoritedAnnonces.includes(parseInt(annonceId))) {
+          heartIcons[index].style.display = 'block';
+          heartEmpties[index].style.display = 'none';
+        } else {
+          heartIcons[index].style.display = 'none';
+          heartEmpties[index].style.display = 'block';
+        }
+      <%else%>
+           heartIcons[index].style.display = 'none';
+          heartEmpties[index].style.display = 'none';
+      <% end %>
+
+      // Add click event listener for the favorite button
+      button.addEventListener('click', function() {
+
+        event.preventDefault();
+        // Toggle the color of the icon
+        heartIcons[index].style.display = heartIcons[index].style.display === 'none' ? 'block' : 'none';
+        heartEmpties[index].style.display = heartEmpties[index].style.display === 'none' ? 'block' : 'none';
+
+        // Send a POST or DELETE request to add or remove the annonce from the user's favorites
+        const url = '/favorites' + (heartIcons[index].style.display === 'none' ? `/${annonceId}` : '' );
+        const method = heartIcons[index].style.display === 'none' ? 'DELETE' : 'POST';
+        const body = JSON.stringify({ annonce_id: annonceId });
+        fetch(url, {
+          method: method,
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': csrfToken
+          },
+          body: body
+        })
+          .then(response => response.json())
+          .then(data => console.log(data))
+          .catch(error => console.error(error));
+      });
+    });
+  });
+</script>

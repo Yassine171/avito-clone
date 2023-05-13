@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
   def home
-    @titre = "Home"
+    @categories = Category.all
   end
 end

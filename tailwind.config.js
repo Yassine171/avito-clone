@@ -13,7 +13,10 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    require('@themesberg/flowbite/plugin')
+    require('flowbite/plugin')
   ],
+  content: [
+    './node_modules/flowbite/**/*.js'
+   ],
 }
 

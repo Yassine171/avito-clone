@@ -1,0 +1,88 @@
+<div class="bg-white rounded-lg shadow-lg m-auto" style="max-width: 800px; margin-top: 50px;">
+    <div class="flex flex-col md:flex-row">
+      <div class="w-full md:w-1/2 mx-auto">
+        <div class="mb-4">
+          <% if @annonce.images.attached? %>
+            <div class="relative shadow-2xl">
+              <div class="relative overflow-hidden w-full">
+                <% @annonce.images.each_with_index do |image, index| %>
+                  <input class="image-radio" type="radio" id="image-<%= index %>" name="carousel" hidden <%= 'checked' if index == 0 %>>
+                  <div class="absolute opacity-0 transition-all duration-1000" style="left: -100%; top: 0; height:50vh;">
+                    <%= image_tag image, class: "w-full h-full object-cover" %>
+                  </div>
+                  <input class="image-radio" type="radio" id="image-<%= index+1 %>" name="carousel" hidden <%= 'checked' if index == @annonce.images.length-1 %>>
+                  <div class="absolute opacity-0 transition-all duration-1000" style="left: 100%; top: 0; height:50vh;">
+                    <%= image_tag image, class: "w-full h-full object-cover" %>
+                  </div>
+                <% end %>
+              </div>
+              <div class="absolute left-0 top-0 bottom-0 w-1/2 bg-gray-600 opacity-75">
+                <label class="arrow-control absolute cursor-pointer text-5xl text-white font-bold text-center top-1/2 left-2 transform -translate-y-1/2 hidden z-20" for="image-<%= @annonce.images.length-1 %>">
+                  &lt;
+                </label>
+                <label class="arrow-control absolute cursor-pointer text-5xl text-white font-bold text-center top-1/2 right-2 transform -translate-y-1/2 hidden z-20" for="image-1">
+                  &gt;
+                </label>
+              </div>
+              <div class="absolute right-0 top-0 bottom-0 w-1/2 bg-gray-600 opacity-75">
+                <label class="arrow-control absolute cursor-pointer text-5xl text-white font-bold text-center top-1/2 left-2 transform -translate-y-1/2 hidden z-20" for="image-<%= @annonce.images.length-2 %>">
+                  &lt;
+                </label>
+                <label class="arrow-control absolute cursor-pointer text-5xl text-white font-bold text-center top-1/2 right-2 transform -translate-y-1/2 hidden z-20" for="image-0">
+                  &gt;
+                </label>
+              </div>
+            </div>
+            <div class="flex justify-center mt-4">
+              <% @annonce.images.each_with_index do |image, index| %>
+                <label class="w-6 h-6 mx-2 rounded-full bg-gray-400 hover:bg-gray-200 cursor-pointer transition-colors duration-300" for="image-<%= index %>"></label>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <div class="px-4 py-2">
+          <h2 class="text-2xl font-bold text-gray-800 mb-4"><%= @annonce.title %></h2>
+          <p class="text-lg text-gray-600 mb-4"><%= @annonce.description %></p>
+          <div class="flex items-center mb-4">
+            <svg class="w-6 h-6 text-gray-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18v18H3z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 6h8M6 12h12M8 18h8" />
+            </svg>
+            <p class="text-gray-600"><%= @annonce.ville.name %></p>
+          </div>
+          <div class="flex items-center mb-4">
+            <svg class="w-6 h-6 text-gray-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l-7-7 7-7M5 12h14" />
+            </svg>
+            <p class="text-gray-600"><%= number_to_currency(@annonce.price, unit: '€', format: '%n %u') %></p>
+          </div>
+          <% if user_signed_in? && @annonce.user == current_user %>
+            <%= link_to 'Edit', edit_annonce_path(@annonce), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mb-4' %>
+            <%= link_to 'Delete', @annonce, method: :delete, data: { confirm: 'Are you sure you want to delete this annonce?' }, class: 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full' %>
+          <% else %>
+            <%
+  =begin%>
+   <%= form_with(model: [ @annonce, @booking ], local: true, class: 'mt-4') do |form| %>
+              <div class="mb-4">
+                <%= form.label :start_date, class: 'text-gray-600 font-bold' %>
+                <%= form.date_field :start_date, class: 'form-input mt-1 block w-full' %>
+              </div>
+              <div class="mb-4">
+                <%= form.label :end_date, class: 'text-gray-600 font-bold' %>
+                <%= form.date_field :end_date, class: 'form-input mt-1 block w-full' %>
+              </div>
+              <div class="mb-4">
+                <%= form.label :comment, class: 'text-gray-600 font-bold' %>
+                <%= form.text_area :comment, rows: 4, class: 'form-input mt-1 block w-full' %>
+              </div>
+              <%= form.submit 'Book now', class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full' %>
+            <% end %>
+  <%
+  =end%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>

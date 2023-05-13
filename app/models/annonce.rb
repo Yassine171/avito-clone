@@ -2,10 +2,11 @@ class Annonce < ApplicationRecord
   belongs_to :ville
   belongs_to :user
   belongs_to :category
-  has_many_attached :images
-
-  enum transaction_type: [:vente, :location]
-  serialize :additional_properties, JSON
+  has_many_attached :images, dependent: :destroy
+  has_many :favorites , dependent: :destroy
+  has_many :favorited_by_users, through: :favorites, source: :user
+  enum type_transaction: { vente: 'vente', location: 'location' }, _prefix: true
+  # serialize :additional_properties, JSON
   validates :title, :description, :price, presence: true
   validate :validate_images
 
@@ -27,4 +28,9 @@ class Annonce < ApplicationRecord
       errors.add(:images, "can't be blank")
     end
   end
+
+  scope :paginate_with_lets_paginate, ->(page, per_page) {
+    all.lets_paginate(page, per_page).per(per_page)
+  }
+
 end

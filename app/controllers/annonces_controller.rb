@@ -10,13 +10,31 @@ class AnnoncesController < ApplicationController
   def create
     @annonce = current_user.annonces.build(annonce_params)
     if @annonce.save
-      redirect_to @annonce, notice: 'L\'annonce a été créée avec succès.'
+      redirect_back(fallback_location: root_path, notice: 'L\'annonce a été créée avec succès.')
     else
       render :new
     end
   end
 
   def edit
+  end
+
+  def index
+    @annonces = Annonce.all.paginate(page: params[:page], per_page: 5)
+
+    if params[:keyword].present?
+      @annonces = @annonces.where('title LIKE ?', "%#{params[:keyword]}%")
+    end
+
+    if params[:category].present?
+      @annonces = @annonces.where(category_id: params[:category])
+    end
+
+    if params[:ville].present?
+      @annonces = @annonces.where(ville_id: params[:ville])
+    end
+
+    @annonces = @annonces.page(params[:page]).paginate(page: params[:page], per_page: 5)
   end
 
   def update
@@ -29,8 +47,17 @@ class AnnoncesController < ApplicationController
 
   def destroy
     @annonce.destroy
-    redirect_to annonces_url, notice: 'Annonce a été détruite avec succès.'
+    redirect_back(fallback_location: root_path, notice: 'Annonce a été détruite avec succès.')
   end
+
+  def show_category
+     @category = Category.find(params[:id])
+    @annonces = Annonce.where(category_id: @category.id).paginate(page: params[:page], per_page: 5)
+    if params[:keyword].present?
+      @annonces = Annonce.where('title LIKE ?', "%#{params[:keyword]}%").page(params[:page]).paginate(page: params[:page], per_page: 5)
+    end
+  end
+
 
   private
 

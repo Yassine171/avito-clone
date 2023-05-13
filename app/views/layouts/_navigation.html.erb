@@ -22,11 +22,11 @@ padding: 0px 8px;">
                 <li class="style-15"><a href="https://credit-immo.avito.ma/creditimmobilier/simulateur/comparateur?utm_source=avito&amp;utm_medium=blackheader" class="style-16">Simulateur crédit Immobilier</a></li>
                 <li class="style-17"><a href="https://www.avito.ma/fr/boutiques/maroc/" class="style-18">Boutique</a></li>
                 <li class="style-19"><a href="https://magazine.avito.ma/" class="style-20">Magazine</a></li>
-                <li class="style-21"><a href="https://aide.avito.ma" class="style-22"><svg class="style-23" height="19" width="19" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="CustomerServiceTitleID">
+                <li class="style-21"><a href="<%= new_contact_path %>" class="style-22"><svg class="style-23" height="19" width="19" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="CustomerServiceTitleID">
                             <title class="style-24">CustomerService Icon</title>
                             <path fill="none" d="M0 0h24v24H0z" class="style-25"></path>
                             <path d="M21 8a2 2 0 012 2v4a2 2 0 01-2 2h-1.062A8.001 8.001 0 0112 23v-2a6 6 0 006-6V9A6 6 0 106 9v7H3a2 2 0 01-2-2v-4a2 2 0 012-2h1.062a8.001 8.001 0 0115.876 0H21zM7.76 15.785l1.06-1.696A5.972 5.972 0 0012 15a5.972 5.972 0 003.18-.911l1.06 1.696A7.963 7.963 0 0112 17a7.963 7.963 0 01-4.24-1.215z" class="style-26"></path>
-                        </svg>Aide et renseignements</a></li>
+                        </svg>Contact</a></li>
             </ul>
         </div>
     </div>
@@ -46,17 +46,44 @@ padding: 0px 8px;">
                         </svg></a></li>
                 <li class="style-42">
                     <span class="style-43">
-                <% if user_signed_in? %>
-                    <p class="style-44">Welcome, <%= current_user.name %>!</p>
-                    <% else %>
-                    <%= link_to "Se connecter", new_user_session_path, class: "style-44" %>
-                    <% end %>
-                <li class="style-45"><button type="button" class="style-46"><span class="style-47"><svg class="style-48" height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="AddTitleID">
-                                <title class="style-49">Add Icon</title>
-                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z" class="style-50"></path>
-                            </svg></span>
-                            <%= link_to "Déposer une annonce", new_annonce_path %></button>
-                </li>
+      <% if user_signed_in? %>
+          <div class="relative inline-block text-left">
+            <div>
+              <button class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" id="dropdownDefaultButton" data-dropdown-toggle="dropdown"  type="button">
+                <%= current_user.name %>
+                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 12a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                  <path fill-rule="evenodd" d="M15 10a5 5 0 11-10 0 5 5 0 0110 0zm-7.707 3.707a1 1 0 01-1.414 0l-3-3a1 1 0 111.414-1.414L7 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Dropdown menu -->
+        <div id="dropdown" class="origin-top-right absolute right-10 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5" hidden>
+
+              <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                <%= link_to "View Profile", edit_user_registration_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900", role: "menuitem" %>
+                <%= link_to "My Favorites", favorites_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900", role: "menuitem" %>
+                <%= link_to "Déconnecter", destroy_user_session_path, method: :delete, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900", role: "menuitem" %>
+              </div>
+            </div>
+          </div>
+      <% else %>
+          <%= link_to "Se connecter", new_user_session_path, class: "style-44" %>
+      <% end %>
+        <li class="style-45">
+          <%= link_to new_annonce_path do %>
+          <button type="button" class="style-46">
+            <span class="style-47">
+              <svg class="style-48" height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="AddTitleID">
+                <title class="style-49">Add Icon</title>
+                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z" class="style-50"></path>
+              </svg>
+            </span>
+            Déposer une annonce
+          </button>
+        <% end %>
+      </li>
             </ul>
         </div>
     </div>

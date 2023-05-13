@@ -490,7 +490,7 @@
     height: 40px;
     min-width: 90px;
     transition: background-color 0.08s ease-in-out 0s, border-color 0.08s ease-in-out 0s, box-shadow 0.06s ease-in-out 0s;
-    background-color: rgb(41, 161, 96);
+    background-color: rgb(41, 161, 96) !important;
     border-color: rgb(41, 161, 96);
     color: rgb(255, 255, 255);
     box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 2px;
